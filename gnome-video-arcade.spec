@@ -8,7 +8,7 @@
 
 Name: gnome-video-arcade
 Version: 0.6.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv3+
 Group: Applications/Emulators
 Summary: GNOME Video Arcade is a MAME front-end for GNOME

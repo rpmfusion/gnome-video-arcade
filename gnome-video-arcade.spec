@@ -29,11 +29,12 @@ Requires: sdlmame-data >= %{sdlmame_data_version}
 
 ### Build Dependencies ###
 
-BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: gettext
 BuildRequires: gnome-doc-utils
 BuildRequires: gnome-icon-theme >= %{gnome_icon_theme_version}
 BuildRequires: gtk2-devel >= %{gtk2_version}
+BuildRequires: intltool
+BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: libwnck-devel >= %{libwnck_version}
 BuildRequires: perl-XML-Parser
 BuildRequires: scrollkeeper
@@ -114,6 +115,10 @@ fi
 %{?fc7:%{_datadir}/omf/%{name}}
 
 %changelog
+* Tue Jul 29 2008 Matthew Barnes <mbarnes@redhat.com> - 0.6.3-2
+- First upload to rpmfusion.
+- Add build requirement for intltool.
+
 * Sun Jun 29 2008 Matthew Barnes <mbarnes@redhat.com> - 0.6.3-1
 - Update to 0.6.3
 

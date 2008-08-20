@@ -8,7 +8,7 @@
 
 Name: gnome-video-arcade
 Version: 0.6.3
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv3+
 Group: Applications/Emulators
 Summary: GNOME Video Arcade is a MAME front-end for GNOME
@@ -49,7 +49,7 @@ GNOME Video Arcade is a MAME front-end for GNOME.
 %build
 export SDLMAME=/usr/bin/mame
 %configure \
-	--with-category-file=/usr/share/mame/catver.ini	\
+	--with-category-file=/usr/share/mame/Catver.ini	\
 	--with-history-file=/usr/share/mame/history.dat
 make %{?_smp_mflags}
 
@@ -115,6 +115,9 @@ fi
 %{?fc7:%{_datadir}/omf/%{name}}
 
 %changelog
+* Tue Aug 19 2008 Matthew Barnes <mbarnes@redhat.com> - 0.6.3-3
+- Fix name of category file (Catver.ini, not catver.ini).
+
 * Tue Jul 29 2008 Matthew Barnes <mbarnes@redhat.com> - 0.6.3-2
 - First upload to rpmfusion.
 - Add build requirement for intltool.

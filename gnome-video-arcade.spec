@@ -7,8 +7,8 @@
 ### Abstract ###
 
 Name: gnome-video-arcade
-Version: 0.6.3
-Release: 3%{?dist}
+Version: 0.6.4
+Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Emulators
 Summary: GNOME Video Arcade is a MAME front-end for GNOME
@@ -115,6 +115,9 @@ fi
 %{?fc7:%{_datadir}/omf/%{name}}
 
 %changelog
+* Sat Sep 27 2008 Matthew Barnes <mbarnes@redhat.com> - 0.6.4-1
+- Update to 0.6.4
+
 * Tue Aug 19 2008 Matthew Barnes <mbarnes@redhat.com> - 0.6.3-3
 - Fix name of category file (Catver.ini, not catver.ini).
 

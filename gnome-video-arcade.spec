@@ -1,19 +1,19 @@
 %define gtk2_version 2.12
 %define libgnomeui_version 2.14
 %define libwnck_version 2.16
-%define sdlmame_data_version 0.122-2
+%define sdlmame_data_version 0.130-1
 %define gnome_icon_theme_version 2.18
 
 ### Abstract ###
 
 Name: gnome-video-arcade
-Version: 0.6.5
+Version: 0.6.6
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Emulators
 Summary: GNOME Video Arcade is a MAME front-end for GNOME
-URL: http://sourceforge.net/projects/gva
-Source: http://downloads.sourceforge.net/gva/%{name}-%{version}.tar.gz
+URL: http://mbarnes.github.com/gnome-video-arcade/
+Source: http://download.gnome.org/sources/%{name}/0.6/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 ### Dependencies ###
@@ -49,8 +49,9 @@ GNOME Video Arcade is a MAME front-end for GNOME.
 %build
 export SDLMAME=/usr/bin/mame
 %configure \
-	--with-category-file=/usr/share/mame/Catver.ini	\
-	--with-history-file=/usr/share/mame/history.dat
+	--with-category-file=%{_datadir}/mame/Catver.ini	\
+	--with-history-file=%{_datadir}/mame/history.dat	\
+	--with-nplayers-file=%{_datadir}/mame/nplayers.ini
 make %{?_smp_mflags}
 
 %install
@@ -115,6 +116,16 @@ fi
 %{?fc7:%{_datadir}/omf/%{name}}
 
 %changelog
+* Sun Apr 05 2009 Matthew Barnes <mbarnes@redhat.com> - 0.6.6-1
+- Update to 0.6.6
+- Update URL tag to GitHub home page.
+- Update Source tag to download.gnome.org.
+- Add --with-nplayers-file configure option.
+- Require sdlmame-data >= 0.130-1 for nplayers.ini (#416).
+
+* Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.6.5-2
+- rebuild for new F11 features
+
 * Fri Nov 21 2008 Matthew Barnes <mbarnes@redhat.com> - 0.6.5-1
 - Update to 0.6.5
 

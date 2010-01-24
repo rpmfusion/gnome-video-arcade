@@ -7,7 +7,7 @@
 ### Abstract ###
 
 Name: gnome-video-arcade
-Version: 0.6.7
+Version: 0.6.8
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Emulators
@@ -120,6 +120,9 @@ fi
 %{?fc7:%{_datadir}/omf/%{name}}
 
 %changelog
+* Sat Jan 23 2010 Matthew Barnes <mbarnes@redhat.com> - 0.6.8-1
+- Update to 0.6.8
+
 * Sun Apr 26 2009 Matthew Barnes <mbarnes@redhat.com> - 0.6.7-1
 - Update to 0.6.7
 

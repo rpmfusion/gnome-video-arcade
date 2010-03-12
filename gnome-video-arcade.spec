@@ -1,5 +1,4 @@
-%define gtk2_version 2.12
-%define libgnomeui_version 2.14
+%define gtk2_version 2.18
 %define libwnck_version 2.16
 %define sdlmame_data_version 0.130-1
 %define gnome_icon_theme_version 2.18
@@ -7,13 +6,13 @@
 ### Abstract ###
 
 Name: gnome-video-arcade
-Version: 0.6.8
+Version: 0.7.0
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Emulators
 Summary: GNOME Video Arcade is a MAME front-end for GNOME
 URL: http://mbarnes.github.com/gnome-video-arcade/
-Source: http://download.gnome.org/sources/%{name}/0.6/%{name}-%{version}.tar.bz2
+Source: http://download.gnome.org/sources/%{name}/0.7/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 ### Dependencies ###
@@ -32,9 +31,9 @@ Requires: sdlmame-data >= %{sdlmame_data_version}
 BuildRequires: gettext
 BuildRequires: gnome-doc-utils
 BuildRequires: gnome-icon-theme >= %{gnome_icon_theme_version}
+BuildRequires: gstreamer-plugins-base-devel
 BuildRequires: gtk2-devel >= %{gtk2_version}
 BuildRequires: intltool
-BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: libwnck-devel >= %{libwnck_version}
 BuildRequires: perl-XML-Parser
 BuildRequires: scrollkeeper
@@ -51,7 +50,6 @@ GNOME Video Arcade is a MAME front-end for GNOME.
 %setup -q
 
 %build
-export SDLMAME=/usr/bin/mame
 %configure \
 	--with-category-file=%{_datadir}/mame/Catver.ini	\
 	--with-history-file=%{_datadir}/mame/history.dat	\
@@ -120,6 +118,11 @@ fi
 %{?fc7:%{_datadir}/omf/%{name}}
 
 %changelog
+* Thu Mar 11 2010 Matthew Barnes <mbarnes@redhat.com> - 0.7.0-1
+- Update to 0.7.0
+- Bump gtk2_version to 2.18.
+- Add gstreamer-plugins-base build requirement.
+
 * Sat Jan 23 2010 Matthew Barnes <mbarnes@redhat.com> - 0.6.8-1
 - Update to 0.6.8
 

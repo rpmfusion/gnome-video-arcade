@@ -15,6 +15,9 @@ URL: http://mbarnes.github.com/gnome-video-arcade/
 Source: http://download.gnome.org/sources/%{name}/0.7/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
+# No GConf2 on ppc
+ExcludeArch: ppc
+
 ### Dependencies ###
 
 Requires(pre): GConf2 >= 2.14
@@ -34,6 +37,7 @@ BuildRequires: gnome-icon-theme >= %{gnome_icon_theme_version}
 BuildRequires: gstreamer-plugins-base-devel
 BuildRequires: gtk2-devel >= %{gtk2_version}
 BuildRequires: intltool
+BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: libwnck-devel >= %{libwnck_version}
 BuildRequires: perl-XML-Parser
 BuildRequires: scrollkeeper
@@ -50,6 +54,7 @@ GNOME Video Arcade is a MAME front-end for GNOME.
 %setup -q
 
 %build
+export SDLMAME=/usr/bin/mame
 %configure \
 	--with-category-file=%{_datadir}/mame/Catver.ini	\
 	--with-history-file=%{_datadir}/mame/history.dat	\
@@ -121,6 +126,7 @@ fi
 * Thu Mar 11 2010 Matthew Barnes <mbarnes@redhat.com> - 0.7.0-1
 - Update to 0.7.0
 - Bump gtk2_version to 2.18.
+- Exclude ppc arch from build (no GConf2).
 - Add gstreamer-plugins-base build requirement.
 
 * Sat Jan 23 2010 Matthew Barnes <mbarnes@redhat.com> - 0.6.8-1

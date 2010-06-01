@@ -6,7 +6,7 @@
 ### Abstract ###
 
 Name: gnome-video-arcade
-Version: 0.7.0
+Version: 0.7.1
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Emulators
@@ -42,6 +42,7 @@ BuildRequires: libwnck-devel >= %{libwnck_version}
 BuildRequires: perl-XML-Parser
 BuildRequires: scrollkeeper
 BuildRequires: sqlite-devel
+BuildRequires: unique-devel
 
 # Work around libXres-devel not getting
 # pulled in by libwnck-devel on Fedora 10.
@@ -123,6 +124,10 @@ fi
 %{?fc7:%{_datadir}/omf/%{name}}
 
 %changelog
+* Mon May 31 2010 Matthew Barnes <mbarnes@redhat.com> - 0.7.1-1
+- Update to 0.7.1
+- Add build requirement for unique-devel.
+
 * Thu Mar 11 2010 Matthew Barnes <mbarnes@redhat.com> - 0.7.0-1
 - Update to 0.7.0
 - Bump gtk2_version to 2.18.

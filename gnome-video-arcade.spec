@@ -21,6 +21,7 @@ Patch: gnome-video-arcade-0.8.0-libX11.patch
 
 ### Dependencies ###
 
+Requires: gsettings-desktop-schemas
 Requires: sdlmame
 Requires: sdlmame-data >= %{sdlmame_data_version}
 

@@ -21,7 +21,6 @@ Patch: gnome-video-arcade-0.8.0-libX11.patch
 
 ### Dependencies ###
 
-Requires: gsettings-desktop-schemas
 Requires: sdlmame
 Requires: sdlmame-data >= %{sdlmame_data_version}
 
@@ -30,6 +29,7 @@ Requires: sdlmame-data >= %{sdlmame_data_version}
 BuildRequires: gettext
 BuildRequires: gnome-doc-utils
 BuildRequires: gnome-icon-theme >= %{gnome_icon_theme_version}
+BuildRequires: gsettings-desktop-schemas-devel
 BuildRequires: gstreamer-plugins-base-devel
 BuildRequires: gtk3-devel >= %{gtk3_version}
 BuildRequires: intltool

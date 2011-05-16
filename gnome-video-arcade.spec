@@ -50,9 +50,10 @@ GNOME Video Arcade is a MAME front-end for GNOME.
 %build
 export MAME=/usr/bin/mame
 %configure \
-	--with-category-file=%{_datadir}/mame/Catver.ini	\
-	--with-history-file=%{_datadir}/mame/history.dat	\
-	--with-nplayers-file=%{_datadir}/mame/nplayers.ini
+    --disable-scrollkeeper \
+    --with-category-file=%{_datadir}/mame/Catver.ini \
+    --with-history-file=%{_datadir}/mame/history.dat \
+    --with-nplayers-file=%{_datadir}/mame/nplayers.ini
 make %{?_smp_mflags}
 
 %install

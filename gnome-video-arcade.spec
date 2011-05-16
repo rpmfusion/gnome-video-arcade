@@ -1,27 +1,25 @@
-%define gtk2_version 2.18
-%define libwnck_version 2.16
+%define gtk3_version 3.0
+%define libwnck3_version 2.91.6
 %define sdlmame_data_version 0.130-1
 %define gnome_icon_theme_version 2.18
 
 ### Abstract ###
 
 Name: gnome-video-arcade
-Version: 0.7.1
+Version: 0.8.0
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Emulators
 Summary: GNOME Video Arcade is a MAME front-end for GNOME
 URL: http://mbarnes.github.com/gnome-video-arcade/
-Source: http://download.gnome.org/sources/%{name}/0.7/%{name}-%{version}.tar.bz2
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source: http://download.gnome.org/sources/%{name}/0.8/%{name}-%{version}.tar.bz2
+
+### Patches ###
+
+# Work around DSO linking issues.
+Patch: gnome-video-arcade-0.8.0-libX11.patch
 
 ### Dependencies ###
-
-Requires(pre): GConf2 >= 2.14
-Requires(preun): GConf2 >= 2.14
-Requires(post): GConf2 >= 2.14
-Requires(post): scrollkeeper
-Requires(postun): scrollkeeper
 
 Requires: sdlmame
 Requires: sdlmame-data >= %{sdlmame_data_version}
@@ -32,27 +30,22 @@ BuildRequires: gettext
 BuildRequires: gnome-doc-utils
 BuildRequires: gnome-icon-theme >= %{gnome_icon_theme_version}
 BuildRequires: gstreamer-plugins-base-devel
-BuildRequires: gtk2-devel >= %{gtk2_version}
+BuildRequires: gtk3-devel >= %{gtk3_version}
 BuildRequires: intltool
-BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
-BuildRequires: libwnck-devel >= %{libwnck_version}
+BuildRequires: libwnck3-devel >= %{libwnck3_version}
+BuildRequires: libX11-devel
 BuildRequires: perl-XML-Parser
-BuildRequires: scrollkeeper
 BuildRequires: sqlite-devel
-BuildRequires: unique-devel
-
-# Work around libXres-devel not getting
-# pulled in by libwnck-devel on Fedora 10.
-BuildRequires: libXres-devel
 
 %description
 GNOME Video Arcade is a MAME front-end for GNOME.
 
 %prep
 %setup -q
+%patch -p1 -b .libX11
 
 %build
-export SDLMAME=/usr/bin/mame
+export MAME=/usr/bin/mame
 %configure \
 	--with-category-file=%{_datadir}/mame/Catver.ini	\
 	--with-history-file=%{_datadir}/mame/history.dat	\
@@ -60,67 +53,44 @@ export SDLMAME=/usr/bin/mame
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
-export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 make install DESTDIR=$RPM_BUILD_ROOT
+
+desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 # Remove GTK-Doc files
 rm -rf $RPM_BUILD_ROOT/%{_datadir}/gtk-doc/html/%{name}
 
-# Remove scrollkeeper crud on F7
-rm -rf $RPM_BUILD_ROOT/%{_var}
-
 %find_lang %{name} --with-gnome
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %post
-scrollkeeper-update -q
-export GCONF_CONFIG_SOURCES=`gconftool-2 --get-default-source`
-gconftool-2 --makefile-install-rule                             \
-        %{_sysconfdir}/gconf/schemas/gnome-video-arcade.schemas \
-        >& /dev/null || :
-touch %{_datadir}/icons/hicolor
-if [ -x /usr/bin/gtk-update-icon-cache ]; then
-    /usr/bin/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor
-fi
-
-%pre
-if [ "$1" -gt 1 ]; then
-    export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-    gconftool-2 --makefile-uninstall-rule                       \
-        %{_sysconfdir}/gconf/schemas/gnome-video-arcade.schemas \
-        >& /dev/null || :
-fi
-
-%preun
-if [ "$1" -eq 0 ]; then
-    export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-    gconftool-2 --makefile-uninstall-rule                       \
-        %{_sysconfdir}/gconf/schemas/gnome-video-arcade.schemas \
-        >& /dev/null || :
-fi
+touch --no-create %{_datadir}/icons/hicolor &> /dev/null || :
 
 %postun
-scrollkeeper-update -q
-touch %{_datadir}/icons/hicolor
-if [ -x /usr/bin/gtk-update-icon-cache ]; then
-    /usr/bin/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor
+if [ $1 -eq 0 ] ; then
+    touch --no-create %{_datadir}/icons/hicolor &> /dev/null
+    gtk-update-icon-cache %{_datadir}/icons/hicolor &> /dev/null || :
+    glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 fi
+
+%posttrans
+gtk-update-icon-cache %{_datadir}/icons/hicolor &> /dev/null || :
+glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 
 %files -f %{name}.lang
 %defattr(-,root,root,-)
 %doc AUTHORS ChangeLog COPYING NEWS README
-%config %{_sysconfdir}/gconf/schemas/*.schemas
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
+%{_datadir}/GConf/gsettings/%{name}.convert
 %{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
+%{_datadir}/glib-2.0/schemas/org.gnome.VideoArcade.gschema.xml
 %{_mandir}/man1/%{name}.1*
-%{?fc7:%{_datadir}/omf/%{name}}
 
 %changelog
+* Sun May 15 2011 Matthew Barnes <mbarnes@redhat.com> - 0.8.0-1
+- Update to 0.8.0
+
 * Mon May 31 2010 Matthew Barnes <mbarnes@redhat.com> - 0.7.1-1
 - Update to 0.7.1
 - Add build requirement for unique-devel.

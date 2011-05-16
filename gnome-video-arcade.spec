@@ -36,6 +36,7 @@ BuildRequires: intltool
 BuildRequires: libwnck3-devel >= %{libwnck3_version}
 BuildRequires: libX11-devel
 BuildRequires: perl-XML-Parser
+BuildRequires: rarian-compat
 BuildRequires: sqlite-devel
 
 %description

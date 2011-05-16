@@ -26,6 +26,7 @@ Requires: sdlmame-data >= %{sdlmame_data_version}
 
 ### Build Dependencies ###
 
+BuildRequires: desktop-file-utils
 BuildRequires: gettext
 BuildRequires: gnome-doc-utils
 BuildRequires: gnome-icon-theme >= %{gnome_icon_theme_version}

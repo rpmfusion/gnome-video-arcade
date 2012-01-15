@@ -6,13 +6,13 @@
 ### Abstract ###
 
 Name: gnome-video-arcade
-Version: 0.8.0
+Version: 0.8.1
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Emulators
 Summary: GNOME Video Arcade is a MAME front-end for GNOME
 URL: http://mbarnes.github.com/gnome-video-arcade/
-Source: http://download.gnome.org/sources/%{name}/0.8/%{name}-%{version}.tar.bz2
+Source: http://download.gnome.org/sources/%{name}/0.8/%{name}-%{version}.tar.xz
 
 ### Patches ###
 
@@ -34,8 +34,9 @@ BuildRequires: gsettings-desktop-schemas-devel
 BuildRequires: gstreamer-plugins-base-devel
 BuildRequires: gtk3-devel >= %{gtk3_version}
 BuildRequires: intltool
-BuildRequires: libwnck3-devel >= %{libwnck3_version}
 BuildRequires: libX11-devel
+BuildRequires: libsoup-devel
+BuildRequires: libwnck3-devel >= %{libwnck3_version}
 BuildRequires: perl-XML-Parser
 BuildRequires: rarian-compat
 BuildRequires: sqlite-devel
@@ -92,6 +93,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Sun Jan 15 2012 Matthew Barnes <mbarnes@redhat.com> - 0.8.1-1
+- Update to 0.8.1
+
 * Sun May 15 2011 Matthew Barnes <mbarnes@redhat.com> - 0.8.0-1
 - Update to 0.8.0
 

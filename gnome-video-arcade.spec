@@ -12,7 +12,7 @@ License: GPLv3+
 Group: Applications/Emulators
 Summary: GNOME Video Arcade is a MAME front-end for GNOME
 URL: http://mbarnes.github.com/gnome-video-arcade/
-Source: http://download.gnome.org/sources/%{name}/0.8/%{name}-%{version}.tar.bz2
+Source: http://download.gnome.org/sources/%{name}/0.8/%{name}-%{version}.tar.xz
 
 ### Patches ###
 

@@ -14,11 +14,6 @@ Summary: GNOME Video Arcade is a MAME front-end for GNOME
 URL: http://mbarnes.github.com/gnome-video-arcade/
 Source: http://download.gnome.org/sources/%{name}/0.8/%{name}-%{version}.tar.xz
 
-### Patches ###
-
-# Work around DSO linking issues.
-Patch: gnome-video-arcade-0.8.0-libX11.patch
-
 ### Dependencies ###
 
 Requires: sdlmame
@@ -46,7 +41,6 @@ GNOME Video Arcade is a MAME front-end for GNOME.
 
 %prep
 %setup -q
-%patch -p1 -b .libX11
 
 %build
 export MAME=/usr/bin/mame
@@ -95,6 +89,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %changelog
 * Sun Jan 15 2012 Matthew Barnes <mbarnes@redhat.com> - 0.8.1-1
 - Update to 0.8.1
+- Drop libX11 patch.
 
 * Sun May 15 2011 Matthew Barnes <mbarnes@redhat.com> - 0.8.0-1
 - Update to 0.8.0

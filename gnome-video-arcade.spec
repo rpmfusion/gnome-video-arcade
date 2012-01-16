@@ -41,7 +41,6 @@ GNOME Video Arcade is a MAME front-end for GNOME.
 
 %prep
 %setup -q
-%patch -p1 -b .libX11
 
 %build
 export MAME=/usr/bin/mame

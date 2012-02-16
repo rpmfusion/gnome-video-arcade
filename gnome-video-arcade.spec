@@ -6,7 +6,7 @@
 ### Abstract ###
 
 Name: gnome-video-arcade
-Version: 0.8.1
+Version: 0.8.3
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Emulators
@@ -87,6 +87,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Thu Feb 16 2012 Matthew Barnes <mbarnes@redhat.com> - 0.8.3-1
+- Update to 0.8.3
+
 * Sun Jan 15 2012 Matthew Barnes <mbarnes@redhat.com> - 0.8.1-1
 - Update to 0.8.1
 - Drop libX11 patch.

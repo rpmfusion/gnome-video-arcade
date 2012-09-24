@@ -1,13 +1,13 @@
 %define gtk3_version 3.0
 %define libwnck3_version 2.91.6
-%define sdlmame_data_version 0.130-1
+%define mame_data_version 0.130-1
 %define gnome_icon_theme_version 2.18
 
 ### Abstract ###
 
 Name: gnome-video-arcade
 Version: 0.8.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv3+
 Group: Applications/Emulators
 Summary: GNOME Video Arcade is a MAME front-end for GNOME
@@ -16,8 +16,8 @@ Source: http://download.gnome.org/sources/%{name}/0.8/%{name}-%{version}.tar.xz
 
 ### Dependencies ###
 
-Requires: sdlmame
-Requires: sdlmame-data >= %{sdlmame_data_version}
+Requires: mame
+Requires: mame-data >= %{mame_data_version}
 
 ### Build Dependencies ###
 
@@ -87,6 +87,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Mon Sep 24 2012 Matthew Barnes <mbarnes@redhat.com> - 0.8.3-2
+- Require mame instead of sdlmame.
+
 * Thu Feb 16 2012 Matthew Barnes <mbarnes@redhat.com> - 0.8.3-1
 - Update to 0.8.3
 

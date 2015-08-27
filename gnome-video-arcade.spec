@@ -1,13 +1,12 @@
 %define gtk3_version 3.0
 %define libwnck3_version 2.91.6
 %define mame_data_version 0.130-1
-%define gnome_icon_theme_version 2.18
 
 ### Abstract ###
 
 Name: gnome-video-arcade
-Version: 0.8.3
-Release: 3%{?dist}
+Version: 0.8.4
+Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Emulators
 Summary: GNOME Video Arcade is a MAME front-end for GNOME
@@ -23,18 +22,15 @@ Requires: mame-data >= %{mame_data_version}
 
 BuildRequires: desktop-file-utils
 BuildRequires: gettext
-BuildRequires: gnome-doc-utils
-BuildRequires: gnome-icon-theme >= %{gnome_icon_theme_version}
 BuildRequires: gsettings-desktop-schemas-devel
-BuildRequires: gstreamer-plugins-base-devel
 BuildRequires: gtk3-devel >= %{gtk3_version}
 BuildRequires: intltool
 BuildRequires: libX11-devel
 BuildRequires: libsoup-devel
 BuildRequires: libwnck3-devel >= %{libwnck3_version}
 BuildRequires: perl-XML-Parser
-BuildRequires: rarian-compat
 BuildRequires: sqlite-devel
+BuildRequires: yelp-tools
 
 %description
 GNOME Video Arcade is a MAME front-end for GNOME.
@@ -45,7 +41,6 @@ GNOME Video Arcade is a MAME front-end for GNOME.
 %build
 export MAME=/usr/bin/mame
 %configure \
-    --disable-scrollkeeper \
     --with-category-file=%{_datadir}/mame/Catver.ini \
     --with-history-file=%{_datadir}/mame/history.dat \
     --with-nplayers-file=%{_datadir}/mame/nplayers.ini
@@ -87,8 +82,8 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_mandir}/man1/%{name}.1*
 
 %changelog
-* Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 0.8.3-3
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+* Wed Aug 26 2015 Matthew Barnes <mbarnes@redhat.com> - 0.8.4-1
+- Update to 0.8.4
 
 * Mon Sep 24 2012 Matthew Barnes <mbarnes@redhat.com> - 0.8.3-2
 - Require mame instead of sdlmame.

@@ -5,7 +5,7 @@
 ### Abstract ###
 
 Name: gnome-video-arcade
-Version: 0.8.4
+Version: 0.8.5
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Emulators
@@ -82,6 +82,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Mon Sep 14 2015 Matthew Barnes <mbarnes@redhat.com> - 0.8.5-1
+- Update to 0.8.5
+
 * Wed Aug 26 2015 Matthew Barnes <mbarnes@redhat.com> - 0.8.4-1
 - Update to 0.8.4
 

@@ -6,7 +6,7 @@
 
 Name: gnome-video-arcade
 Version: 0.8.6
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv3+
 Group: Applications/Emulators
 Summary: GNOME Video Arcade is a MAME front-end for GNOME
@@ -82,6 +82,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Thu Aug 31 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 0.8.6-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Sun Apr 16 2017 Sérgio Basto <sergio@serjux.com> - 0.8.6-1
 - Update gnome-video-arcade to 0.8.6
 
